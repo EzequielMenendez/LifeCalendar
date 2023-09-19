@@ -1,6 +1,7 @@
 import express from 'express'
 import mongoose from 'mongoose'
 import dotenv from 'dotenv';
+import router from './routes/index';
 
 dotenv.config();
 
@@ -18,6 +19,8 @@ const server = express()
 server.use(express.json())
 
 const PORT = process.env.PORT || 3001
+
+server.use('/api', router)
 
 server.listen(PORT, ()=>{
     console.log('Server running on post', PORT)
