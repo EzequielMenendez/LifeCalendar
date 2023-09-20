@@ -1,19 +1,13 @@
 import express from 'express'
-import mongoose from 'mongoose'
 import morgan from 'morgan'
 import dotenv from 'dotenv'
 import router from './routes/index'
+import connectDb from './db'
 
 dotenv.config()
 
 if(process.env.DB_URL){
-    mongoose.connect(process.env.DB_URL)
-    .then(()=>{
-        console.log('Connected to Data Base')
-    })
-    .catch((err)=>{
-        console.error(err)
-    })
+    connectDb(process.env.DB_URL)
 }
 
 const server = express()
