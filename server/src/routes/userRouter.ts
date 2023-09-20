@@ -1,19 +1,19 @@
 import express from 'express'
-import postUser from '../handlers/userHandler/postUser'
-import getUser from '../handlers/userHandler/getUser'
+import registerUser from '../handlers/userHandler/registerUser'
+import loginUser from '../handlers/userHandler/loginUser'
 
 const userRouter = express.Router()
 
-userRouter.get('/:id', async(req, res)=>{
-    const { id } = req.params
-    const user = await getUser(id)
+userRouter.post('/login', async(req, res)=>{
+    const { id } = req.body
+    const user = await loginUser(id)
     res.status(200).json(user)
 })
 
-userRouter.post('/', async(req, res)=>{
+userRouter.post('/register', async(req, res)=>{
     try {
-        const newUser = await postUser(req.body)
-        res.status(201).json({message: "User created susesfully", newUser})
+        const newUser = await registerUser(req.body)
+        res.status(201).json({newUser, message: "User created susesfully",})
     } catch (error) {
         res.status(404).json({message: error});
     }
