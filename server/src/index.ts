@@ -1,9 +1,10 @@
 import express from 'express'
 import mongoose from 'mongoose'
-import dotenv from 'dotenv';
-import router from './routes/index';
+import morgan from 'morgan'
+import dotenv from 'dotenv'
+import router from './routes/index'
 
-dotenv.config();
+dotenv.config()
 
 if(process.env.DB_URL){
     mongoose.connect(process.env.DB_URL)
@@ -17,6 +18,8 @@ if(process.env.DB_URL){
 
 const server = express()
 server.use(express.json())
+
+server.use(morgan('dev'))
 
 const PORT = process.env.PORT || 3001
 
