@@ -1,6 +1,7 @@
 import User from "../../models/userModel"
 import { UserData } from "../../types"
 import bcrypt from 'bcryptjs'
+import jwt from 'jsonwebtoken'
 
 const registerUser = async(body: UserData)=>{
     try {
@@ -15,10 +16,19 @@ const registerUser = async(body: UserData)=>{
         })
     
         const userCreated = await newUser.save()
-        return {
-            name: userCreated.name,
-            email: userCreated.email
-        }
+
+        const token = await jwt.sign(
+            {
+                id: userCreated._id
+            },
+            'secret123',
+            {
+                expiresIn: "1d"
+            }
+        )
+
+        return token
+
     } catch (error:any) {
         throw new Error(error.message);
     }

@@ -12,8 +12,8 @@ userRouter.post('/login', async(req, res)=>{
 
 userRouter.post('/register', async(req, res)=>{
     try {
-        const newUser = await registerUser(req.body)
-        res.status(201).json({newUser, message: "User created susesfully",})
+        const token = await registerUser(req.body)
+        res.status(201).json(token)
     } catch (error) {
         res.status(404).json({message: error});
     }
