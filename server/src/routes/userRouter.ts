@@ -10,13 +10,6 @@ userRouter.post('/login', async(req, res)=>{
     res.status(200).json(user)
 })
 
-userRouter.post('/register', async(req, res)=>{
-    try {
-        const token = await registerUser(req.body)
-        res.status(201).json(token)
-    } catch (error) {
-        res.status(404).json({message: error});
-    }
-})
+userRouter.post('/register', registerUser)
 
 export default userRouter

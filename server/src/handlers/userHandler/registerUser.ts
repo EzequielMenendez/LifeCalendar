@@ -1,10 +1,11 @@
 import User from "../../models/userModel"
-import { UserData } from "../../types"
 import bcrypt from 'bcryptjs'
-import jwt from 'jsonwebtoken'
+import { Response, Request } from 'express';
+import createToken from "../../libs/jwt";
 
-const registerUser = async(body: UserData)=>{
+const registerUser = async(req: Request, res: Response)=>{
     try {
+        const { body } = req
         const { name, email, password } = body
 
         const hash:string = await bcrypt.hash(password, 10)
@@ -17,20 +18,12 @@ const registerUser = async(body: UserData)=>{
     
         const userCreated = await newUser.save()
 
-        const token = await jwt.sign(
-            {
-                id: userCreated._id
-            },
-            'secret123',
-            {
-                expiresIn: "1d"
-            }
-        )
-
-        return token
+        const token = await createToken({id: userCreated._id})
+        res.cookie("token", token)
+        res.status(201).json({message: 'User created successfully'})
 
     } catch (error:any) {
-        throw new Error(error.message);
+        res.status(500).json({error: error.message})
     }
 }
 
