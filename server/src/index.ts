@@ -3,6 +3,7 @@ import morgan from 'morgan'
 import dotenv from 'dotenv'
 import router from './routes/index'
 import connectDb from './db'
+import cookieParser from 'cookie-parser'
 
 dotenv.config()
 
@@ -12,6 +13,7 @@ if(process.env.DB_URL){
 
 const server = express()
 server.use(express.json())
+server.use(cookieParser())
 
 server.use(morgan('dev'))
 
