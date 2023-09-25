@@ -3,3 +3,11 @@ export interface UserData {
     email: string;
     password: string;
 }
+
+export interface ValidationSchema {
+    parse(data: object): void;
+}
+
+export interface zodError {
+    message: string
+}
