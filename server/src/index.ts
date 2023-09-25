@@ -4,6 +4,7 @@ import dotenv from 'dotenv'
 import router from './routes/index'
 import connectDb from './db'
 import cookieParser from 'cookie-parser'
+import cors from 'cors'
 
 dotenv.config()
 
@@ -12,6 +13,7 @@ if(process.env.DB_URL){
 }
 
 const server = express()
+server.use(cors())
 server.use(express.json())
 server.use(cookieParser())
 
