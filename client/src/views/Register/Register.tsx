@@ -1,8 +1,8 @@
 import { useForm } from 'react-hook-form'
-import { UserData } from '../../types'
+import { RegisterUser } from '../../types'
 import { useAuth } from '../../context/AuthContext'
 import { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 
 function Register() {
 
@@ -14,16 +14,18 @@ function Register() {
     if(isAuthenticated)navigate('/')
   }, [isAuthenticated])
 
-  const onSubmit = async (values: UserData) => {
+  const onSubmit = async (values: RegisterUser) => {
     singUp(values)
   };  
 
   return (
+    <div className='flex h-[calc(100vh-100px)] items-center justify-center'>
     <div className='bg-zinc-800 max-w-md p-10 rounded-md'>
+    <h2 className="text-2xl font-bold">Register</h2>
       {
         registerError && (
           <div>
-            <p className='bg-red-500 p-2 text-white'>{registerError}</p>
+            <p className='bg-red-500 p-2 text-white my-2'>{registerError}</p>
           </div>
         )
       }
@@ -62,6 +64,8 @@ function Register() {
             ) : null}
             <button type='submit'>Register</button>
         </form>
+        <p className="flex gap-x-2 justify-between">Already have an account? <Link to="/login" className="text-sky-500">Sing In</Link></p>
+    </div>
     </div>
   )
 }

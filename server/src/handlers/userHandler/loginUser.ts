@@ -9,13 +9,13 @@ const loginUser = async(req: Request, res: Response)=>{
         const user = await userModel.findOne({email})
 
         if(!user){
-            res.status(404).json({error: 'User not found'})
+            res.status(404).json({message: 'User not found'})
             return
         }
         const hash = await bcrypt.compare(password, user.password)
 
         if(!hash){
-            res.status(400).json({ error: 'Incorrect password'})
+            res.status(400).json({ message: 'Incorrect password'})
             return
         }
 

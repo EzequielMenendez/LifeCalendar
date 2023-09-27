@@ -1,10 +1,12 @@
-import { createContext, useContext, useState, ReactNode } from "react";
-import { registerRequest } from "../api/auth";
-import { UserData, UserDataId } from '../types'
+import { createContext, useContext, useState, ReactNode } from "react"
+import { loginRequest, registerRequest } from "../api/auth"
+import { LoginUser, RegisterUser, UserData } from '../types'
+import { useEffect } from 'react'
 
 type AuthContextType = {
-    singUp: (user: UserData) => Promise<void>
-    user: UserDataId | null
+    singUp: (user: RegisterUser) => Promise<void>
+    singIn: (user: LoginUser) => Promise<void>
+    user:  null | UserData
     isAuthenticated: boolean
     errors: string | null
 };
@@ -29,7 +31,7 @@ export const AuthProvider:React.FC<AuthProviderProps> = ({children}: { children:
     const [isAuthenticated, setIsAuthenticated] = useState(false)
     const [errors, setErrors] = useState(null)
 
-    const singUp = async(user:UserData) =>{
+    const singUp = async(user:RegisterUser) =>{
         try {
             const res = await registerRequest(user)
             setUser(res.data)
@@ -39,8 +41,25 @@ export const AuthProvider:React.FC<AuthProviderProps> = ({children}: { children:
         }
     }
 
+    const singIn = async (user:LoginUser) => {
+        try {
+            await loginRequest(user)
+        } catch (error:any) {
+            setErrors(error.response.data.message)
+        }
+    }
+
+    useEffect(()=>{
+        if(errors){
+            const timer = setTimeout(()=>{
+                setErrors(null)
+            }, 5000)
+            return () => clearTimeout(timer)
+        }
+    }, [errors])
+
     return(
-        <AuthContext.Provider value={{singUp, user, isAuthenticated, errors}}>
+        <AuthContext.Provider value={{singUp, singIn, user, isAuthenticated, errors}}>
             {children}
         </AuthContext.Provider>
     )
