@@ -7,11 +7,11 @@ import { useNavigate, Link } from 'react-router-dom'
 function Register() {
 
   const {register, handleSubmit, formState:{errors}} = useForm()
-  const { singUp, isAuthenticated, errors: registerError }:any = useAuth()
+  const { singUp, isAuthenticated, errors: registerError } = useAuth()
   const navigate = useNavigate()
 
   useEffect(()=>{
-    if(isAuthenticated)navigate('/')
+    if(isAuthenticated)navigate('/home')
   }, [isAuthenticated])
 
   const onSubmit = async (values: RegisterUser) => {

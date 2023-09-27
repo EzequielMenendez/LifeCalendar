@@ -2,6 +2,7 @@ import { createContext, useContext, useState, ReactNode } from "react"
 import { loginRequest, registerRequest } from "../api/auth"
 import { LoginUser, RegisterUser, UserData } from '../types'
 import { useEffect } from 'react'
+import Cookies from 'js-cookie'
 
 type AuthContextType = {
     singUp: (user: RegisterUser) => Promise<void>
@@ -43,7 +44,9 @@ export const AuthProvider:React.FC<AuthProviderProps> = ({children}: { children:
 
     const singIn = async (user:LoginUser) => {
         try {
-            await loginRequest(user)
+            const res = await loginRequest(user)
+            setUser(res.data)
+            setIsAuthenticated(true)
         } catch (error:any) {
             setErrors(error.response.data.message)
         }
@@ -57,6 +60,13 @@ export const AuthProvider:React.FC<AuthProviderProps> = ({children}: { children:
             return () => clearTimeout(timer)
         }
     }, [errors])
+
+    useEffect(()=>{
+        const cookies = Cookies.get()
+        if(cookies.token){
+            console.log(cookies.token)
+        }
+    }, [])
 
     return(
         <AuthContext.Provider value={{singUp, singIn, user, isAuthenticated, errors}}>

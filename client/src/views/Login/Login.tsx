@@ -1,12 +1,18 @@
 import { useForm } from "react-hook-form"
 import { useAuth } from "../../context/AuthContext"
 import { LoginUser } from "../../types"
-import { Link } from "react-router-dom"
+import { useEffect } from 'react'
+import { Link, useNavigate } from "react-router-dom"
 
 function Login() {
 
   const {register, handleSubmit, formState:{errors}} = useForm()
-  const {singIn, errors: siginError} = useAuth()
+  const { singIn, isAuthenticated, errors: siginError} = useAuth()
+  const navigate = useNavigate()
+
+  useEffect(()=>{
+    if(isAuthenticated)navigate('/home')
+  }, [isAuthenticated])
 
   const onSubmit = ((values:LoginUser)=>{
     singIn(values)
