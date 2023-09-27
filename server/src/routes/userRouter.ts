@@ -6,6 +6,7 @@ import profileUser from '../handlers/userHandler/profileUser'
 import authRequired from '../midlewere/validateToken'
 import validateSchema from '../midlewere/validateUser'
 import { loginSchema, registerSchema } from '../schemas/auth.schema'
+import verifyToken from '../handlers/userHandler/verifyToken'
 
 const userRouter = express.Router()
 
@@ -14,6 +15,8 @@ userRouter.post('/login', validateSchema(loginSchema), loginUser)
 userRouter.post('/register', validateSchema(registerSchema), registerUser)
 
 userRouter.post('/logout', logoutUser)
+
+userRouter.get('/verify', verifyToken)
 
 userRouter.get('/profile', authRequired, profileUser)
 
