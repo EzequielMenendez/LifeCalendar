@@ -14,3 +14,14 @@ export interface UserData {
     name: string;
     id: string;
 }
+
+export interface GlobalState {
+    user:  null | UserData
+    isAuth: boolean,
+    errors: string | null
+}
+
+export interface ActionRedux {
+    type: string,
+    payload: any
+}
