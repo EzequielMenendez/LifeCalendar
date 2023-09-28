@@ -82,7 +82,7 @@ export const AuthProvider:React.FC<AuthProviderProps> = ({children}: { children:
             try {
                 const res = await verifyTokenRequest()
                 if(!res.data){
-                    setIsAuthenticated(true)
+                    setIsAuthenticated(false)
                     setLoading(false)
                     return
                 }
