@@ -11,6 +11,7 @@ type AuthContextType = {
     isAuthenticated: boolean
     errors: string | null
     loading: boolean
+    logout: () => Promise<void>
 };
 
 export const AuthContext = createContext<AuthContextType | undefined>(undefined)
@@ -54,6 +55,12 @@ export const AuthProvider:React.FC<AuthProviderProps> = ({children}: { children:
         }
     }
 
+    const logout = async() =>{
+        Cookies.remove("token")
+        setIsAuthenticated(false)
+        setUser(null)
+    }
+
     useEffect(()=>{
         if(errors){
             const timer = setTimeout(()=>{
@@ -92,7 +99,7 @@ export const AuthProvider:React.FC<AuthProviderProps> = ({children}: { children:
     }, [])
 
     return(
-        <AuthContext.Provider value={{singUp, loading, singIn, user, isAuthenticated, errors}}>
+        <AuthContext.Provider value={{singUp, loading, logout, singIn, user, isAuthenticated, errors}}>
             {children}
         </AuthContext.Provider>
     )
