@@ -5,15 +5,26 @@ import { AuthProvider } from "./context/AuthContext"
 import Home from "./views/Home/Home"
 import ProtectedRoutes from "./ProtectedRoutes"
 import { useEffect } from 'react'
-import { useDispatch } from "react-redux"
-import { checkToken } from "./redux/actions"
+import { useDispatch, useSelector } from "react-redux"
+import { checkToken, resetFormError } from "./redux/actions"
+import { GlobalState } from "./types"
 
 function App() {
 
   const dispatch = useDispatch()
+  const errorForm = useSelector((state:GlobalState)=>state.errors)
   useEffect(()=>{
     dispatch(checkToken() as any)
   },[])
+
+  useEffect(()=>{
+    if(errorForm){
+      const timer = setTimeout(()=>{
+        dispatch(resetFormError() as any)
+      }, 5000)
+      return () => clearTimeout(timer)
+    }
+  }, [errorForm])
 
   return (
     <div>

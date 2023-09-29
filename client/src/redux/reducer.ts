@@ -1,5 +1,5 @@
 import { ActionRedux, GlobalState } from "../types";
-import { ERROR, LOGOUT, SING_IN_SING_UP } from "./actions";
+import { ERROR, LOGOUT, RESET_ERROR, SING_IN_SING_UP } from "./actions";
 
 const initialState:GlobalState = {
     user: null,
@@ -20,6 +20,11 @@ function rootReducer(state=initialState, action:ActionRedux){
                 ...state,
                 user: null,
                 isAuth: false
+            }
+        case RESET_ERROR:
+            return{
+                ...state,
+                errors: null
             }
         case ERROR:
             return{
