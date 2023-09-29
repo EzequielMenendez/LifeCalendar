@@ -1,13 +1,12 @@
-import { useAuth } from "./context/AuthContext"
 import { Navigate, Outlet } from "react-router-dom"
+import { useSelector } from "react-redux"
+import { GlobalState } from "./types"
 
 function ProtectedRoutes(){
-    const { isAuthenticated, loading } = useAuth()
 
-    if(loading){
-        return <h1>Loading...</h1>
-    }
-    if(!loading && !isAuthenticated){
+    const isAuthenticated = useSelector((state:GlobalState)=>state.isAuth)
+
+    if(!isAuthenticated){
         return <Navigate to='/login' replace/>
     }
 
