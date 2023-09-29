@@ -1,21 +1,27 @@
 import { useForm } from "react-hook-form"
-import { useAuth } from "../../context/AuthContext"
-import { LoginUser } from "../../types"
+//import { useAuth } from "../../context/AuthContext"
+import { GlobalState, LoginUser } from "../../types"
 import { useEffect } from 'react'
 import { Link, useNavigate } from "react-router-dom"
+import { singIn } from "../../redux/actions"
+import { useDispatch, useSelector} from "react-redux"
 
 function Login() {
 
   const {register, handleSubmit, formState:{errors}} = useForm()
-  const { singIn, isAuthenticated, errors: siginError} = useAuth()
+  //const { singIn, isAuthenticated, errors: siginError} = useAuth()
+  const isAuthenticated = useSelector((state:GlobalState)=>state.isAuth)
+  const siginError = useSelector((state:GlobalState)=>state.errors)
   const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   useEffect(()=>{
     if(isAuthenticated)navigate('/home')
   }, [isAuthenticated])
 
   const onSubmit = ((values:LoginUser)=>{
-    singIn(values)
+    dispatch(singIn(values) as any)
+    //singIn(values)
   })
 
   return (

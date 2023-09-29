@@ -4,8 +4,17 @@ import Register from "./views/Register/Register"
 import { AuthProvider } from "./context/AuthContext"
 import Home from "./views/Home/Home"
 import ProtectedRoutes from "./ProtectedRoutes"
+import { useEffect } from 'react'
+import { useDispatch } from "react-redux"
+import { checkToken } from "./redux/actions"
 
 function App() {
+
+  const dispatch = useDispatch()
+  useEffect(()=>{
+    dispatch(checkToken() as any)
+  },[])
+
   return (
     <div>
       <AuthProvider>

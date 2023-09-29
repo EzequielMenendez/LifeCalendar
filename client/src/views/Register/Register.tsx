@@ -1,13 +1,18 @@
 import { useForm } from 'react-hook-form'
-import { RegisterUser } from '../../types'
-import { useAuth } from '../../context/AuthContext'
+import { GlobalState, RegisterUser } from '../../types'
+//mport { useAuth } from '../../context/AuthContext'
 import { useEffect } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
+import { singUp } from '../../redux/actions'
 
 function Register() {
 
+  const dispatch = useDispatch()
   const {register, handleSubmit, formState:{errors}} = useForm()
-  const { singUp, isAuthenticated, errors: registerError } = useAuth()
+  //const { singUp, isAuthenticated, errors: registerError } = useAuth()
+  const isAuthenticated = useSelector((state:GlobalState)=>state.isAuth)
+  const registerError = useSelector((state:GlobalState)=>state.errors)
   const navigate = useNavigate()
 
   useEffect(()=>{
@@ -15,7 +20,8 @@ function Register() {
   }, [isAuthenticated])
 
   const onSubmit = async (values: RegisterUser) => {
-    singUp(values)
+    dispatch(singUp(values) as any)
+    //singUp(values)
   };  
 
   return (
