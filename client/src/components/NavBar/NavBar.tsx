@@ -14,18 +14,26 @@ function NavBar() {
 
     if(isAuth){
         return (
-            <div>
-              <h1>LifePlan</h1>
-              <button onClick={onLogout}>Logout</button>
-            </div>
+            <header>
+                <nav className="h-20 flex items-center justify-around bg-zinc-800">
+                <h1>LifePlan</h1>
+                <div className="flex gap-2">
+                    <button onClick={onLogout}>Logout</button>
+                </div>
+                </nav>
+            </header>
         )
     }
     return (
-      <div>
-        <h1>LifePlan</h1>
-        <Link to='/login'>Login</Link>
-        <Link to='/register'>Register</Link>
-      </div>
+        <header>
+            <nav className="h-20 flex items-center justify-around bg-zinc-800">
+                <h1>LifePlan</h1>
+                <div className="flex gap-10">
+                    <Link to='/login'>Login</Link>
+                    <Link to='/register'>Register</Link>
+                </div>
+            </nav>
+      </header>
     )
 }
   
