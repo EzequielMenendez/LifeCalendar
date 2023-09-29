@@ -9,7 +9,6 @@ import { useDispatch, useSelector} from "react-redux"
 function Login() {
 
   const {register, handleSubmit, formState:{errors}} = useForm()
-  //const { singIn, isAuthenticated, errors: siginError} = useAuth()
   const isAuthenticated = useSelector((state:GlobalState)=>state.isAuth)
   const siginError = useSelector((state:GlobalState)=>state.errors)
   const navigate = useNavigate()
@@ -21,7 +20,7 @@ function Login() {
 
   const onSubmit = ((values:LoginUser)=>{
     dispatch(singIn(values) as any)
-    //singIn(values)
+
   })
 
   return (

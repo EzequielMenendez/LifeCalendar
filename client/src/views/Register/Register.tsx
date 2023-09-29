@@ -10,7 +10,6 @@ function Register() {
 
   const dispatch = useDispatch()
   const {register, handleSubmit, formState:{errors}} = useForm()
-  //const { singUp, isAuthenticated, errors: registerError } = useAuth()
   const isAuthenticated = useSelector((state:GlobalState)=>state.isAuth)
   const registerError = useSelector((state:GlobalState)=>state.errors)
   const navigate = useNavigate()
@@ -21,7 +20,7 @@ function Register() {
 
   const onSubmit = async (values: RegisterUser) => {
     dispatch(singUp(values) as any)
-    //singUp(values)
+
   };  
 
   return (
