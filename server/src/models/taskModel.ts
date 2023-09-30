@@ -8,11 +8,11 @@ const taskModel = new mongoose.Schema({
     },
     startDate: {
         type: Date,
-        default: new Date()
+        default: Date.now
     },
     endDate: {
         type: Date,
-        default: new Date()
+        default: Date.now
     }
 }, {timestamps: true})
 

@@ -23,3 +23,13 @@ export interface ValidationSchema {
 export interface zodError {
     message: string
 }
+
+export interface TaskData {
+    name: string;
+    startDate: Date,
+    endDate: Date,
+    _id: mongoose.Types.ObjectId;
+    createdAt: Date;
+    updatedAt: Date;
+    __v?: number;
+}
