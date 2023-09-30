@@ -6,8 +6,7 @@ import { NewUserData } from "../../types";
 
 const registerUser = async(req: Request, res: Response)=>{
     try {
-        const { body } = req
-        const { name, email, password } = body
+        const { name, email, password } = req.body
 
         const userFound:NewUserData | null  = await User.findOne({email})
         if(userFound){

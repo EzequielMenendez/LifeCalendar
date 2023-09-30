@@ -1,10 +1,10 @@
-import taskModel from '../../models/taskModel';
+import Task from '../../models/taskModel';
 import { Response, Request } from 'express';
 import { TaskData } from '../../types';
 
 const getTask = async(_req:Request, res:Response)=>{
     try {
-        const task:Array<TaskData> | null = await taskModel.find()
+        const task:Array<TaskData> | null = await Task.find()
 
         if(!task){
             res.status(404).json({error: 'taskNotFound'})
@@ -14,7 +14,7 @@ const getTask = async(_req:Request, res:Response)=>{
         const filterTask = task.map((t:TaskData)=>{
             return {
                 id: t._id,
-                name: t.name,
+                title: t.title,
                 startDate: t.startDate,
                 endDate: t.endDate
             }

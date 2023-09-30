@@ -25,7 +25,7 @@ export interface zodError {
 }
 
 export interface TaskData {
-    name: string;
+    title?: string;
     startDate: Date,
     endDate: Date,
     _id: mongoose.Types.ObjectId;
