@@ -2,9 +2,11 @@ import Task from '../../models/taskModel';
 import { Response, Request } from 'express';
 import { TaskData } from '../../types';
 
-const getTask = async(_req:Request, res:Response)=>{
+const getTask = async(req:Request, res:Response)=>{
     try {
-        const task:Array<TaskData> | null = await Task.find()
+        const task:Array<TaskData> | null = await Task.find({
+            user: req?.user?.id
+        })
 
         if(!task){
             res.status(404).json({error: 'taskNotFound'})

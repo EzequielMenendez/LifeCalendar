@@ -14,7 +14,8 @@ const postTask = async(req:Request, res:Response)=>{
         const newTask = new Task({
             title,
             startDate,
-            endDate
+            endDate,
+            user: req?.user?.id
         })
 
         const taskCreated:TaskData = await newTask.save()
