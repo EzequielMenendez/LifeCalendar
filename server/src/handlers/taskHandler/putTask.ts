@@ -2,15 +2,18 @@ import Task from '../../models/taskModel';
 import { Response, Request } from 'express';
 import { TaskData } from '../../types';
 
-const getTask = async(req:Request, res:Response)=>{
+const putTask = async(req:Request, res:Response)=>{
     try {
         const { id } = req.params
+
         if(!id){
             res.status(404).json({error: 'taskNotFound'})
             return   
         }
         
-        const task:TaskData | null = await Task.findById(id)
+        const task:TaskData | null = await Task.findByIdAndUpdate(id, req.body, {
+            new: true
+        })
 
         if(!task){
             res.status(404).json({error: 'taskNotFound'})
@@ -28,4 +31,4 @@ const getTask = async(req:Request, res:Response)=>{
     }
 }
 
-export default getTask
+export default putTask
