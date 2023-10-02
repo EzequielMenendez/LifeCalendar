@@ -4,7 +4,8 @@ import { ERROR, LOGOUT, RESET_ERROR, SING_IN_SING_UP } from "./actions";
 const initialState:GlobalState = {
     user: null,
     isAuth: false,
-    errors: null
+    errors: null,
+    loading: true
 }
 
 function rootReducer(state=initialState, action:ActionRedux){
@@ -14,12 +15,14 @@ function rootReducer(state=initialState, action:ActionRedux){
                 ...state,
                 user: action.payload,
                 isAuth: true,
+                loading: false
             }
         case LOGOUT:
             return{
                 ...state,
                 user: null,
-                isAuth: false
+                isAuth: false,
+                loading: false
             }
         case RESET_ERROR:
             return{

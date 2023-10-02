@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { checkToken, resetFormError } from "./redux/actions"
 import { GlobalState } from "./types"
 import NavBar from "./components/NavBar/NavBar"
+import Task from "./views/Task/Task"
 
 function App() {
 
@@ -36,6 +37,7 @@ function App() {
 
           <Route element={<ProtectedRoutes/>}>
             <Route path="/home" element={<Home/>}/>
+            <Route path="/task" element={<Task/>}/>
           </Route>
       </Routes>
     </div>

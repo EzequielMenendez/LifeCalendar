@@ -17,8 +17,9 @@ export interface UserData {
 
 export interface GlobalState {
     user:  null | UserData
-    isAuth: boolean,
+    isAuth: boolean
     errors: string | null
+    loading: boolean
 }
 
 export interface ActionRedux {
