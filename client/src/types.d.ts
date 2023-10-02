@@ -29,6 +29,6 @@ export interface ActionRedux {
 
 export interface Task {
     title?: string,
-    startData?: Date,
-    endData?: Date
+    startDate?: Date | string,
+    endDate?: Date | string
 }
