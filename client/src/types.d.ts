@@ -25,3 +25,9 @@ export interface ActionRedux {
     type: string,
     payload: any
 }
+
+export interface Task {
+    title?: string,
+    startData?: Date,
+    endData?: Date
+}
