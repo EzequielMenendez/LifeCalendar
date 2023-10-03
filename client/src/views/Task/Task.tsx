@@ -1,3 +1,4 @@
+import MonthCalendar from "../../components/TaskCalendar/MonthCalendar"
 import TaskForm from "../../components/TaskForm/TaskForm"
 import { useState } from 'react'
 
@@ -26,6 +27,7 @@ function Task(){
             )}
             <h1>Task</h1>
             <button onClick={()=> handleOpenAlert()}>create Task</button>
+            <MonthCalendar/>
         </div>
     )
 }

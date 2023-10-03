@@ -1,12 +1,12 @@
 import { Dispatch } from 'redux';
-import { loginRequest, registerRequest, verifyTokenRequest } from "../api/auth"
+import { getAllTaskRequest, loginRequest, registerRequest, verifyTokenRequest } from "../api/auth"
 import { LoginUser, RegisterUser } from "../types"
 import Cookies from 'js-cookie'
 
 export const SING_IN_SING_UP = "SING_IN_SING_UP"
 export const LOGOUT = "LOGOUT"
 export const RESET_ERROR = "RESET_ERROR"
-
+export const GET_ALL_TASK = "GET_ALL_TASK"
 export const ERROR = "ERROR"
 
 export const singIn = (user:LoginUser) => {
@@ -76,6 +76,20 @@ export const logout = () => {
         return dispatch({
             type: LOGOUT
         })
+    }
+}
+
+export const getAllTask = () => {
+    return async function(dispatch:Dispatch) {
+        try {
+            const res = await getAllTaskRequest()
+            return dispatch({
+                type: GET_ALL_TASK,
+                payload: res.data
+            })
+        } catch (error) {
+            
+        }
     }
 }
 

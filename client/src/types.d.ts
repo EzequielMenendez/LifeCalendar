@@ -1,3 +1,5 @@
+import { Event } from 'react-big-calendar'
+
 export interface LoginUser {
     email: string,
     password: email
@@ -15,20 +17,30 @@ export interface UserData {
     id: string;
 }
 
-export interface GlobalState {
-    user:  null | UserData
-    isAuth: boolean
-    errors: string | null
-    loading: boolean
-}
-
 export interface ActionRedux {
     type: string,
     payload: any
 }
 
-export interface Task {
+export interface Task{
+    id?: string,
     title?: string,
     startDate?: Date | string,
     endDate?: Date | string
 }
+
+export interface GlobalState {
+    user:  null | UserData
+    isAuth: boolean
+    errors: string | null
+    loading: boolean
+    allTask: Array<Task>
+}
+
+export interface MyEvent extends Event{
+    id: number;
+    title: string;
+    start: Date;
+    end: Date;
+    location?: string;
+  }
