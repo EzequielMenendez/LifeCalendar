@@ -1,9 +1,15 @@
-import MonthCalendar from "../../components/TaskCalendar/MonthCalendar"
+import TaskCalendar from "../../components/TaskCalendar/TaskCalendar"
+import TaskDetail from "../../components/TaskDetail/TaskDetail"
 import TaskForm from "../../components/TaskForm/TaskForm"
 import { useState } from 'react'
 
 function Task(){
     const [ showAlert, setShowAlert ] = useState(false)
+    const [ showDetails, setShowDetails ] = useState(null)
+
+    const handleCloseDetail = () => {
+        setShowDetails(null)
+    }
 
     const handleCloseAlert = () => {
         setShowAlert(false)
@@ -25,9 +31,19 @@ function Task(){
                     </div>
                 </div>
             )}
+            {showDetails && (
+                <div className="pop-ups">
+                    <div className="flex h-[calc(100vh-100px)] items-center justify-center">
+                        <div className="bg-zinc-800 max-w-md p-10 rounded-md">
+                            <TaskDetail id={showDetails}/>
+                            <button onClick={()=> handleCloseDetail()}>X</button>
+                        </div>
+                    </div>
+                </div>
+            )}
             <h1>Task</h1>
             <button onClick={()=> handleOpenAlert()}>create Task</button>
-            <MonthCalendar/>
+            <TaskCalendar setShowDetails={setShowDetails} />
         </div>
     )
 }

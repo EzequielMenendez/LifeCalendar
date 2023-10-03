@@ -41,6 +41,7 @@ export interface GlobalState {
     errors: string | null
     loading: boolean
     allTask: Array<TaskRes>
+    taskDetail: TaskRes | null
 }
 
 export interface MyEvent extends Event{

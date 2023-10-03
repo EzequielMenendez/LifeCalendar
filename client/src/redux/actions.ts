@@ -1,5 +1,5 @@
 import { Dispatch } from 'redux';
-import { getAllTaskRequest, loginRequest, registerRequest, verifyTokenRequest } from "../api/auth"
+import { getAllTaskRequest, getTaskRequest, loginRequest, registerRequest, verifyTokenRequest } from "../api/auth"
 import { LoginUser, RegisterUser } from "../types"
 import Cookies from 'js-cookie'
 
@@ -7,6 +7,7 @@ export const SING_IN_SING_UP = "SING_IN_SING_UP"
 export const LOGOUT = "LOGOUT"
 export const RESET_ERROR = "RESET_ERROR"
 export const GET_ALL_TASK = "GET_ALL_TASK"
+export const GET_TASK = "GET_TASK"
 export const ERROR = "ERROR"
 
 export const singIn = (user:LoginUser) => {
@@ -85,6 +86,20 @@ export const getAllTask = () => {
             const res = await getAllTaskRequest()
             return dispatch({
                 type: GET_ALL_TASK,
+                payload: res.data
+            })
+        } catch (error) {
+            
+        }
+    }
+}
+
+export const getTaskDetail = (id:string) => {
+    return async function(dispatch:Dispatch) {
+        try {
+            const res = await getTaskRequest(id)
+            return dispatch({
+                type: GET_TASK,
                 payload: res.data
             })
         } catch (error) {
