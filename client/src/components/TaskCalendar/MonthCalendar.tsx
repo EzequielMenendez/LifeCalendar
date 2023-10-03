@@ -4,23 +4,8 @@ import { Calendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
 import 'moment/locale/es';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
-import { GlobalState, MyEvent } from '../../types';
+import { GlobalState, MyEvent, TaskRes } from '../../types';
 import { getAllTask } from '../../redux/actions';
-
-const events: MyEvent[] = [
-    {
-      id: 1,
-      title: 'Reunión de equipo',
-      start: new Date(2023, 9, 5, 10, 0),
-      end: new Date(2023, 9, 5, 11, 30),
-    },
-    {
-      id: 2,
-      title: 'Cita médica',
-      start: new Date(2023, 9, 8, 14, 0),
-      end: new Date(2023, 9, 8, 15, 0),
-    },
-];
 
 const localizer = momentLocalizer(moment)
 
@@ -33,6 +18,18 @@ const MonthCalendar = () => {
     useEffect(()=>{
         dispatch(getAllTask() as any)
     },[])
+
+    const events: MyEvent[] = tasks.map((task: TaskRes) => {
+        const startDate = new Date(task.startDate)
+        const endDate = new Date(task.endDate)
+      
+        return {
+          id: task.id,
+          title: task.title,
+          start: startDate,
+          end: endDate,
+        };
+    });
 
   return (
     <div>

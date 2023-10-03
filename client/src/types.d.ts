@@ -23,10 +23,16 @@ export interface ActionRedux {
 }
 
 export interface Task{
-    id?: string,
     title?: string,
     startDate?: Date | string,
     endDate?: Date | string
+}
+
+export interface TaskRes{
+    id: string,
+    title: string,
+    startDate: Date | string,
+    endDate: Date | string
 }
 
 export interface GlobalState {
@@ -34,13 +40,13 @@ export interface GlobalState {
     isAuth: boolean
     errors: string | null
     loading: boolean
-    allTask: Array<Task>
+    allTask: Array<TaskRes>
 }
 
 export interface MyEvent extends Event{
-    id: number;
+    id: string;
     title: string;
-    start: Date;
-    end: Date;
+    start: Date | string;
+    end: Date | string;
     location?: string;
-  }
+}
