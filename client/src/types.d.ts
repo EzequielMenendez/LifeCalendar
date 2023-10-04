@@ -42,6 +42,7 @@ export interface GlobalState {
     loading: boolean
     allTask: Array<TaskRes>
     taskDetail: TaskRes | null
+    resetCalendar: number
 }
 
 export interface MyEvent extends Event{

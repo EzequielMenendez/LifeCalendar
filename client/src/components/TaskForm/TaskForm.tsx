@@ -1,14 +1,16 @@
 import { useForm } from "react-hook-form"
 import { Task } from "../../types"
-import { postTaskRequest } from "../../api/auth"
 import DatePicker from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.css"
 import { useState } from 'react'
+import { useDispatch } from "react-redux"
 import dayjs from "dayjs"
 import utc from "dayjs/plugin/utc"
+import { createTask } from "../../redux/actions"
 dayjs.extend(utc)
 
 function TaskForm(){
+    const dispatch = useDispatch()
     const {register, handleSubmit, formState:{errors}} = useForm()
     const [ startDate, setStartDate ] = useState(new Date())
     const [ endDate, setEndDate ] = useState(new Date())
@@ -17,16 +19,10 @@ function TaskForm(){
     const onSubmit = (async(data:Task)=>{
         const values:Task = {
             title: data.title,
-            startDate: dayjs(startDate).format("YYYY-MM-DDTHH:mm:ss[Z]"),
-            endDate: dayjs(endDate).format("YYYY-MM-DDTHH:mm:ss[Z]")
+            startDate: dayjs(startDate).format("YYYY-MM-DDTHH:mm:ss"),
+            endDate: dayjs(endDate).format("YYYY-MM-DDTHH:mm:ss")
         }
-        
-        try {
-            await postTaskRequest(values)
-            
-        } catch (error) {
-            console.log(error)
-        }
+        dispatch(createTask(values) as any)
     })
 
     const onChangeStart = (date:Date) => {

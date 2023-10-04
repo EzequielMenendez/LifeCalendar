@@ -13,14 +13,15 @@ const TaskCalendar = (props:any) => {
 
   const dispatch = useDispatch()
   const tasks = useSelector((state:GlobalState)=>state.allTask)
+  const reset = useSelector((state: GlobalState)=>state.resetCalendar)
 
   useEffect(()=>{
       dispatch(getAllTask() as any)
-  },[])
+  },[reset])
 
   const events: MyEvent[] = tasks.map((task: TaskRes) => {
-    const startDate = new Date(task.startDate)
-    const endDate = new Date(task.endDate)
+    const startDate = task.startDate ? new Date(task.startDate) : new Date()
+    const endDate = task.endDate ? new Date(task.endDate) : new Date()
       
     return {
       id: task.id,

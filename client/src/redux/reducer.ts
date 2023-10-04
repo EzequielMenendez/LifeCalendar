@@ -1,5 +1,5 @@
 import { ActionRedux, GlobalState } from "../types";
-import { ERROR, GET_ALL_TASK, GET_TASK, LOGOUT, RESET_ERROR, SING_IN_SING_UP } from "./actions";
+import { CREATE_TASK, ERROR, GET_ALL_TASK, GET_TASK, LOGOUT, RESET_ERROR, SING_IN_SING_UP } from "./actions";
 
 const initialState:GlobalState = {
     user: null,
@@ -7,7 +7,8 @@ const initialState:GlobalState = {
     errors: null,
     loading: true,
     allTask: [],
-    taskDetail: null
+    taskDetail: null,
+    resetCalendar: 0
 }
 
 function rootReducer(state=initialState, action:ActionRedux){
@@ -35,6 +36,11 @@ function rootReducer(state=initialState, action:ActionRedux){
             return{
                 ...state,
                 taskDetail: action.payload
+            }
+        case CREATE_TASK:
+            return{
+                ...state,
+                resetCalendar: state.resetCalendar + 1
             }
         case RESET_ERROR:
             return{
