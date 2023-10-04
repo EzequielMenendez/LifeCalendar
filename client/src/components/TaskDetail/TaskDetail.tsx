@@ -1,15 +1,14 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { GlobalState, TaskRes } from '../../types'
 import { deleteTask, getTaskDetail} from '../../redux/actions'
 import TaskUpdate from '../TaskUpdate/TaskUpdate';
 
 const TaskDetail = (props:any) => {
-    const {id} = props
+    const {id, setShowUpdate, showUpdate} = props
     const dispatch = useDispatch()
     const task:TaskRes | null = useSelector((state:GlobalState) => state.taskDetail)
     const reset = useSelector((state: GlobalState)=>state.resetCalendar)
-    const [ showUptade, setShowUpdate ] = useState(false)
 
     useEffect(()=>{
         if(id){
@@ -46,7 +45,7 @@ const TaskDetail = (props:any) => {
         setShowUpdate(false)
     }
 
-    if(showUptade){
+    if(showUpdate){
         return(
             <div>
                 <TaskUpdate id={id} task={task}/>

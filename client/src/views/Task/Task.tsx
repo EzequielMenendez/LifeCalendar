@@ -6,6 +6,7 @@ import { useState } from 'react'
 function Task(){
     const [ showAlert, setShowAlert ] = useState(false)
     const [ showDetails, setShowDetails ] = useState(null)
+    const [ showUpdate, setShowUpdate ] = useState(false)
 
     const handleCloseDetail = () => {
         setShowDetails(null)
@@ -35,8 +36,10 @@ function Task(){
                 <div className="pop-ups">
                     <div className="flex h-[calc(100vh-100px)] items-center justify-center">
                         <div className="bg-zinc-800 max-w-md p-10 rounded-md">
-                            <TaskDetail id={showDetails}/>
+                            <TaskDetail id={showDetails} showUpdate={showUpdate} setShowUpdate={setShowUpdate}/>
+                            {!showUpdate && (
                             <button onClick={()=> handleCloseDetail()}>X</button>
+                            )}
                         </div>
                     </div>
                 </div>
