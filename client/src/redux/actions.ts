@@ -1,5 +1,5 @@
 import { Dispatch } from 'redux';
-import { getAllTaskRequest, getTaskRequest, loginRequest, postTaskRequest, registerRequest, verifyTokenRequest } from "../api/auth"
+import { deleteTaskRequest, getAllTaskRequest, getTaskRequest, loginRequest, postTaskRequest, putTaskRequest, registerRequest, verifyTokenRequest } from "../api/auth"
 import { LoginUser, RegisterUser, Task } from "../types"
 import Cookies from 'js-cookie'
 
@@ -8,7 +8,7 @@ export const LOGOUT = "LOGOUT"
 export const RESET_ERROR = "RESET_ERROR"
 export const GET_ALL_TASK = "GET_ALL_TASK"
 export const GET_TASK = "GET_TASK"
-export const CREATE_TASK = "CREATE_TASK"
+export const RESET_CALENDAR = "RESET_CALENDAR"
 export const ERROR = "ERROR"
 
 export const singIn = (user:LoginUser) => {
@@ -114,7 +114,33 @@ export const createTask = (task: Task) => {
         try {
             await postTaskRequest(task)
             return dispatch({
-                type: CREATE_TASK
+                type: RESET_CALENDAR
+            })
+        } catch (error) {
+            
+        }
+    }
+}
+
+export const deleteTask = (id: string) => {
+    return async function(dispatch:Dispatch) {
+        try {
+            await deleteTaskRequest(id)
+            return dispatch({
+                type: RESET_CALENDAR
+            })
+        } catch (error) {
+            
+        }
+    }
+}
+
+export const updateTask = (id: string, task:Task) => {
+    return async function(dispatch:Dispatch) {
+        try {
+            await putTaskRequest(id, task)
+            return dispatch({
+                type: RESET_CALENDAR
             })
         } catch (error) {
             
