@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { GlobalState, TaskRes } from '../../types'
-import { deleteTask, getTaskDetail, updateTask } from '../../redux/actions'
+import { deleteTask, getTaskDetail} from '../../redux/actions'
 import TaskUpdate from '../TaskUpdate/TaskUpdate';
 
 const TaskDetail = (props:any) => {
@@ -44,12 +44,6 @@ const TaskDetail = (props:any) => {
 
     const onCloseUpdate = () => {
         setShowUpdate(false)
-    }
-
-    const onUpdate = () => {
-        if(task){
-            dispatch(updateTask(id, task) as any)
-        }
     }
 
     if(showUptade){
