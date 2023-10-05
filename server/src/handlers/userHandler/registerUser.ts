@@ -3,6 +3,7 @@ import bcrypt from 'bcryptjs'
 import { Response, Request } from 'express';
 import createToken from "../../libs/jwt";
 import { NewUserData } from "../../types";
+import { sendEmailRegister } from "../../emailNotify/emailNotify";
 
 const registerUser = async(req: Request, res: Response)=>{
     try {
@@ -26,6 +27,9 @@ const registerUser = async(req: Request, res: Response)=>{
 
         const token = await createToken({id: userCreated._id})
         res.cookie("token", token)
+
+        sendEmailRegister(userCreated.email)
+        
         res.status(201).json({
             name: userCreated.name,
             email: userCreated.email,
