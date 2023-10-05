@@ -5,6 +5,8 @@ import router from './routes/index'
 import connectDb from './db'
 import cookieParser from 'cookie-parser'
 import cors from 'cors'
+import cronOn from './cron-on/cron-on'
+import cron from 'node-cron'
 
 dotenv.config()
 
@@ -29,3 +31,7 @@ server.use('/api', router)
 server.listen(PORT, ()=>{
     console.log('Server running on post', PORT)
 })
+
+cron.schedule('*/10 * * * *', async () => {
+    cronOn()
+});

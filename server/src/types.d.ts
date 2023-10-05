@@ -25,11 +25,24 @@ export interface zodError {
 }
 
 export interface TaskData {
-    title?: string;
-    startDate: Date,
-    endDate: Date,
-    _id: mongoose.Types.ObjectId;
-    createdAt: Date;
-    updatedAt: Date;
-    __v?: number;
+    title?: string
+    startDate: Date
+    endDate: Date
+    _id: mongoose.Types.ObjectId
+    createdAt: Date
+    updatedAt: Date
+    __v?: number
+}
+
+export interface TaskData_User extends TaskData {
+    title: string
+    user: {
+        _id: mongoose.Types.ObjectId,
+        name: string
+        email: string
+        password: string
+        createdAt: Date
+        updatedAt: Date
+        __v?: number
+    }
 }
