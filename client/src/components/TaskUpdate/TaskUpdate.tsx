@@ -10,7 +10,7 @@ import { updateTask } from "../../redux/actions"
 dayjs.extend(utc)
 
 const TaskUpdate = (props:any) => {
-    const {id, task} = props
+    const {id, task, onCloseUpdate} = props
     const dispatch = useDispatch()
     const {register, handleSubmit, formState:{errors}, setValue} = useForm()
     const [ startDate, setStartDate ] = useState(new Date(task.startDate))
@@ -27,7 +27,8 @@ const TaskUpdate = (props:any) => {
             startDate: dayjs(startDate).format("YYYY-MM-DDTHH:mm:ss"),
             endDate: dayjs(endDate).format("YYYY-MM-DDTHH:mm:ss")
         }
-        dispatch(updateTask(id, values) as any)
+        await dispatch(updateTask(id, values) as any)
+        onCloseUpdate()
     })
 
     const onChangeStart = (date:Date) => {

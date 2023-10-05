@@ -5,7 +5,7 @@ import { deleteTask, getTaskDetail} from '../../redux/actions'
 import TaskUpdate from '../TaskUpdate/TaskUpdate';
 
 const TaskDetail = (props:any) => {
-    const {id, setShowUpdate, showUpdate} = props
+    const {id, setShowUpdate, showUpdate, handleCloseDetail} = props
     const dispatch = useDispatch()
     const task:TaskRes | null = useSelector((state:GlobalState) => state.taskDetail)
     const reset = useSelector((state: GlobalState)=>state.resetCalendar)
@@ -33,8 +33,9 @@ const TaskDetail = (props:any) => {
         endDate = new Date(task?.endDate).toLocaleDateString('en-US', options)
     }
 
-    const onDelete = () => {
-        dispatch(deleteTask(id) as any)
+    const onDelete = async() => {
+        await dispatch(deleteTask(id) as any)
+        handleCloseDetail()
     }
 
     const onShowUpdate = () => {
@@ -48,19 +49,24 @@ const TaskDetail = (props:any) => {
     if(showUpdate){
         return(
             <div>
-                <TaskUpdate id={id} task={task}/>
-                <button onClick={()=> onCloseUpdate()}>X</button>
+                <button onClick={()=> onCloseUpdate()} className="bg-red-600 w-6 h-6 rounded-md hover:bg-red-700">X</button>
+                <TaskUpdate id={id} task={task} onCloseUpdate={onCloseUpdate}/>
             </div>
         )
     }
 
   return (
     <div>
-        <h3>title: {task?.title}</h3>
-        <p>start Date: {startDate}</p>
-        <p>end Date: {endDate}</p>
-        <button onClick={onShowUpdate}>Uptade Task</button><br></br>
-        <button onClick={onDelete}>Delete Task</button>
+        <p>Title:</p>
+        <p>{task?.title}</p>
+        <p>Start Date:</p>
+        <p>{startDate}</p>
+        <p>End Date:</p>
+        <p>{endDate}</p>
+        <div className='flex gap-2 flex-wrap mt-4'>
+            <button onClick={onShowUpdate} className='bg-sky-500 w-24 h-7 rounded-md'>Uptade Task</button><br></br>
+            <button onClick={onDelete} className='bg-red-600 w-24 h-7 rounded-md'>Delete Task</button>
+        </div>
     </div>
   )
 }

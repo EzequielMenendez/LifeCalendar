@@ -16,10 +16,11 @@ function NavBar() {
         return (
             <header>
                 <nav className="h-20 flex items-center justify-around bg-zinc-800">
-                <h1>LifePlan</h1>
-                <div className="flex gap-2">
-                    <button onClick={onLogout}>Logout</button>
-                </div>
+                    <Link to='/'>Life Calendar</Link>
+                    <div className="flex gap-10">
+                        <Link to='/task' className="mr-12">Task</Link>
+                        <button onClick={onLogout}>Logout</button>
+                    </div>
                 </nav>
             </header>
         )
@@ -27,7 +28,7 @@ function NavBar() {
     return (
         <header>
             <nav className="h-20 flex items-center justify-around bg-zinc-800">
-                <h1>LifePlan</h1>
+                <Link to='/'>Life Calendar</Link>
                 <div className="flex gap-10">
                     <Link to='/login'>Login</Link>
                     <Link to='/register'>Register</Link>

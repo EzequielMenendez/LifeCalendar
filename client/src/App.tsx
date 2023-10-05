@@ -1,7 +1,6 @@
 import { Routes, Route } from "react-router-dom"
 import Login from "./views/Login/Login"
 import Register from "./views/Register/Register"
-import Home from "./views/Home/Home"
 import ProtectedRoutes from "./ProtectedRoutes"
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from "react-redux"
@@ -36,7 +35,6 @@ function App() {
           <Route path="/register" element={<Register />}/>
 
           <Route element={<ProtectedRoutes/>}>
-            <Route path="/home" element={<Home/>}/>
             <Route path="/task" element={<Task/>}/>
           </Route>
       </Routes>

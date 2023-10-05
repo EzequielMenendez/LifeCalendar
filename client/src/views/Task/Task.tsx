@@ -36,10 +36,10 @@ function Task(){
                 <div className="pop-ups">
                     <div className="flex h-[calc(100vh-100px)] items-center justify-center">
                         <div className="bg-zinc-800 max-w-md p-10 rounded-md">
-                            <TaskDetail id={showDetails} showUpdate={showUpdate} setShowUpdate={setShowUpdate}/>
                             {!showUpdate && (
-                            <button onClick={()=> handleCloseDetail()}>X</button>
+                            <button onClick={()=> handleCloseDetail()} className="bg-red-600 w-6 h-6 rounded-md hover:bg-red-700">X</button>
                             )}
+                            <TaskDetail id={showDetails} showUpdate={showUpdate} setShowUpdate={setShowUpdate} handleCloseDetail={handleCloseDetail}/>
                         </div>
                     </div>
                 </div>
