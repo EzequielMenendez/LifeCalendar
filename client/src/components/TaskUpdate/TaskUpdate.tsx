@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux"
 import dayjs from "dayjs"
 import utc from "dayjs/plugin/utc"
 import { updateTask } from "../../redux/actions"
+import Swal from 'sweetalert2'
 dayjs.extend(utc)
 
 const TaskUpdate = (props:any) => {
@@ -22,13 +23,23 @@ const TaskUpdate = (props:any) => {
     }, [])
 
     const onSubmit = (async(data:Task)=>{
+        const result = await Swal.fire({
+            title: "You're sure?",
+            text: 'Do you want to update this event?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'yes, update it',
+            cancelButtonText: 'Cancel',
+        });
         const values:Task = {
             title: data.title,
             startDate: dayjs(startDate).format("YYYY-MM-DDTHH:mm:ss"),
             endDate: dayjs(endDate).format("YYYY-MM-DDTHH:mm:ss")
         }
-        await dispatch(updateTask(id, values) as any)
-        onCloseUpdate()
+        if (result.isConfirmed) {
+            await dispatch(updateTask(id, values) as any)
+            onCloseUpdate()
+        }
     })
 
     const onChangeStart = (date:Date) => {
@@ -71,7 +82,7 @@ const TaskUpdate = (props:any) => {
                 dateFormat="MMMM d, yyyy h:mm aa"
                 className="text-black"
                 />
-                <button type='submit'>Update Task</button>
+                <button type='submit' className='bg-sky-500 w-24 h-7 rounded-md mt-4'>Update Task</button>
             </form>
         </div>
     )

@@ -9,7 +9,8 @@ import utc from "dayjs/plugin/utc"
 import { createTask } from "../../redux/actions"
 dayjs.extend(utc)
 
-function TaskForm(){
+function TaskForm(props: any){
+    const {handleCloseAlert} = props
     const dispatch = useDispatch()
     const {register, handleSubmit, formState:{errors}} = useForm()
     const [ startDate, setStartDate ] = useState(new Date())
@@ -23,6 +24,7 @@ function TaskForm(){
             endDate: dayjs(endDate).format("YYYY-MM-DDTHH:mm:ss")
         }
         dispatch(createTask(values) as any)
+        handleCloseAlert()
     })
 
     const onChangeStart = (date:Date) => {

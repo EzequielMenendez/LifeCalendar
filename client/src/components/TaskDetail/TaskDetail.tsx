@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { GlobalState, TaskRes } from '../../types'
 import { deleteTask, getTaskDetail} from '../../redux/actions'
 import TaskUpdate from '../TaskUpdate/TaskUpdate';
+import Swal from 'sweetalert2'
 
 const TaskDetail = (props:any) => {
     const {id, setShowUpdate, showUpdate, handleCloseDetail} = props
@@ -34,8 +35,18 @@ const TaskDetail = (props:any) => {
     }
 
     const onDelete = async() => {
-        await dispatch(deleteTask(id) as any)
-        handleCloseDetail()
+    const result = await Swal.fire({
+        title: "You're sure?",
+        text: 'This action cannot be undone',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'yes, delete it',
+        cancelButtonText: 'Cancel',
+    });
+    if (result.isConfirmed) {
+        handleCloseDetail();
+        dispatch(deleteTask(id) as any);
+    }
     }
 
     const onShowUpdate = () => {

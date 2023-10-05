@@ -2,6 +2,7 @@ import { Dispatch } from 'redux';
 import { deleteTaskRequest, getAllTaskRequest, getTaskRequest, loginRequest, postTaskRequest, putTaskRequest, registerRequest, verifyTokenRequest } from "../api/auth"
 import { LoginUser, RegisterUser, Task } from "../types"
 import Cookies from 'js-cookie'
+import Swal from 'sweetalert2';
 
 export const SING_IN_SING_UP = "SING_IN_SING_UP"
 export const LOGOUT = "LOGOUT"
@@ -90,7 +91,11 @@ export const getAllTask = () => {
                 payload: res.data
             })
         } catch (error) {
-            
+            Swal.fire({
+                title: 'Ups!',
+                text: 'Something went wrong.',
+                icon: 'warning',
+            });
         }
     }
 }
@@ -104,7 +109,11 @@ export const getTaskDetail = (id:string) => {
                 payload: res.data
             })
         } catch (error) {
-            
+            Swal.fire({
+                title: 'Ups!',
+                text: 'Something went wrong.',
+                icon: 'warning',
+            });
         }
     }
 }
@@ -113,11 +122,20 @@ export const createTask = (task: Task) => {
     return async function(dispatch:Dispatch) {
         try {
             await postTaskRequest(task)
+            Swal.fire({
+                title: 'Created',
+                text: 'The task has been successfully created.',
+                icon: 'success',
+            });
             return dispatch({
                 type: RESET_CALENDAR
             })
         } catch (error) {
-            
+            Swal.fire({
+                title: 'Ups!',
+                text: 'Something went wrong.',
+                icon: 'warning',
+            });
         }
     }
 }
@@ -126,11 +144,20 @@ export const deleteTask = (id: string) => {
     return async function(dispatch:Dispatch) {
         try {
             await deleteTaskRequest(id)
+            Swal.fire({
+                title: 'Removed',
+                text: 'The task has been successfully deleted.',
+                icon: 'success',
+            });
             return dispatch({
                 type: RESET_CALENDAR
             })
         } catch (error) {
-            
+            Swal.fire({
+                title: 'Ups!',
+                text: 'Something went wrong.',
+                icon: 'warning',
+            });
         }
     }
 }
@@ -139,11 +166,20 @@ export const updateTask = (id: string, task:Task) => {
     return async function(dispatch:Dispatch) {
         try {
             await putTaskRequest(id, task)
+            Swal.fire({
+                title: 'Updated',
+                text: 'The task has been successfully updated.',
+                icon: 'success',
+            });
             return dispatch({
                 type: RESET_CALENDAR
             })
         } catch (error) {
-            
+            Swal.fire({
+                title: 'Ups!',
+                text: 'Something went wrong.',
+                icon: 'warning',
+            });
         }
     }
 }

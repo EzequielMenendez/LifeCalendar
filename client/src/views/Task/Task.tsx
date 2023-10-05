@@ -26,7 +26,7 @@ function Task(){
                 <div className="pop-ups">
                     <div className="flex h-[calc(100vh-100px)] items-center justify-center">
                         <div className="bg-zinc-800 max-w-md p-10 rounded-md">
-                            <TaskForm/>
+                            <TaskForm handleCloseAlert={handleCloseAlert}/>
                             <button onClick={()=> handleCloseAlert()}>X</button>
                         </div>
                     </div>
