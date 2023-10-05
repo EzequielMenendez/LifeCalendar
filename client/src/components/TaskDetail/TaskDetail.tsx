@@ -35,18 +35,18 @@ const TaskDetail = (props:any) => {
     }
 
     const onDelete = async() => {
-    const result = await Swal.fire({
-        title: "You're sure?",
-        text: 'This action cannot be undone',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'yes, delete it',
-        cancelButtonText: 'Cancel',
-    });
-    if (result.isConfirmed) {
-        handleCloseDetail();
-        dispatch(deleteTask(id) as any);
-    }
+        const result = await Swal.fire({
+            title: "You're sure?",
+            text: 'This action cannot be undone',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'yes, delete it',
+            cancelButtonText: 'Cancel',
+        });
+        if (result.isConfirmed) {
+            handleCloseDetail();
+            dispatch(deleteTask(id) as any);
+        }
     }
 
     const onShowUpdate = () => {
