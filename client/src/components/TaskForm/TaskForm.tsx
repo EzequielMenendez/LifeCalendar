@@ -38,6 +38,9 @@ function TaskForm(props: any){
     return(
         <div>
             <form onSubmit={handleSubmit(onSubmit)}>
+                <label htmlFor="title" className="text-lg font-bold">
+                Title:
+                </label>
                 <input
                 type="title"
                 id="title"
@@ -48,6 +51,9 @@ function TaskForm(props: any){
                 className="inputs"
                 />
                 {errors.title && <p className='text-red-500'>Title is required</p>}
+                <label htmlFor="startDate" className="text-lg font-bold">
+                Start Date:
+                </label>
                 <DatePicker
                 selected={startDate}
                 onChange={(date:Date) => onChangeStart(date)}
@@ -57,7 +63,9 @@ function TaskForm(props: any){
                 dateFormat="MMMM d, yyyy h:mm aa"
                 className="inputs"
                 />
-
+                <label htmlFor="endDate" className="text-lg font-bold">
+                End Date:
+                </label>
                 <DatePicker 
                 selected={endDate}
                 onChange={(date:Date) => onChangeEnd(date)}
@@ -67,7 +75,7 @@ function TaskForm(props: any){
                 dateFormat="MMMM d, yyyy h:mm aa"
                 className="inputs"
                 />
-                <button type='submit' className='bg-blue-500 hover:bg-blue-600 w-24 h-7 rounded-md shadow-md mt-4'>Create Task</button>
+                <button type='submit' className="bg-blue-500 hover:bg-blue-600 w-32 h-10 rounded-md shadow-md mt-4">Create Event</button>
             </form>
         </div>
     )

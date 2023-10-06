@@ -53,6 +53,7 @@ const TaskUpdate = (props:any) => {
     return (
         <div>
             <form onSubmit={handleSubmit(onSubmit)}>
+                <label className="text-lg font-bold">Title:</label>
                 <input
                 type="title"
                 id="title"
@@ -63,6 +64,7 @@ const TaskUpdate = (props:any) => {
                 className="inputs"
                 />
                 {errors.title && <p className='text-red-500'>Title is required</p>}
+                <label className="text-lg font-bold">Start Date:</label>
                 <DatePicker
                 selected={startDate}
                 onChange={(date:Date) => onChangeStart(date)}
@@ -72,7 +74,7 @@ const TaskUpdate = (props:any) => {
                 dateFormat="MMMM d, yyyy h:mm aa"
                 className="inputs"
                 />
-
+                <label className="text-lg font-bold">End Date:</label>
                 <DatePicker 
                 selected={endDate}
                 onChange={(date:Date) => onChangeEnd(date)}
@@ -82,7 +84,7 @@ const TaskUpdate = (props:any) => {
                 dateFormat="MMMM d, yyyy h:mm aa"
                 className="inputs"
                 />
-                <button type='submit' className='bg-blue-500 hover:bg-blue-600 w-24 h-7 rounded-md shadow-md mt-4'>Update Task</button>
+                <button type='submit' className="bg-blue-500 hover:bg-blue-600 w-32 h-10 rounded-md shadow-md mt-4">Update Task</button>
             </form>
         </div>
     )

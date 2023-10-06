@@ -26,7 +26,7 @@ function Task(){
                 <div className="pop-ups">
                     <div className="flex h-[calc(100vh-100px)] items-center justify-center">
                         <div className="bg-white max-w-md p-10 rounded-md">
-                            <button onClick={()=> handleCloseAlert()} className="bg-red-500 w-6 h-6 rounded-md hover:bg-red-600 shadow-md">X</button>
+                            <button onClick={()=> handleCloseAlert()} className="bg-red-500 w-8 h-8 rounded-full hover:bg-red-600 shadow-md mb-2">X</button>
                             <TaskForm handleCloseAlert={handleCloseAlert}/>
                         </div>
                     </div>
@@ -37,7 +37,7 @@ function Task(){
                     <div className="flex h-[calc(100vh-100px)] items-center justify-center">
                         <div className="bg-white max-w-md p-10 rounded-md">
                             {!showUpdate && (
-                            <button onClick={()=> handleCloseDetail()} className="bg-red-500 w-6 h-6 rounded-md hover:bg-red-600 shadow-md">X</button>
+                            <button onClick={()=> handleCloseDetail()} className="bg-red-500 w-8 h-8 rounded-full hover:bg-red-600 shadow-md mb-2">X</button>
                             )}
                             <TaskDetail id={showDetails} showUpdate={showUpdate} setShowUpdate={setShowUpdate} handleCloseDetail={handleCloseDetail}/>
                         </div>
@@ -45,7 +45,7 @@ function Task(){
                 </div>
             )}
             <h1 className="text-2xl m-auto mt-8">Calendar</h1>
-            <button onClick={()=> handleOpenAlert()} className='bg-blue-500 hover:bg-blue-600 w-24 h-7 rounded-md shadow-md mt-3 mb-6'>create Task</button>
+            <button onClick={()=> handleOpenAlert()} className="bg-blue-500 hover:bg-blue-600 w-32 h-10 rounded-md shadow-md mt-4 mb-4">create Event</button>
             <TaskCalendar setShowDetails={setShowDetails} />
         </div>
     )
