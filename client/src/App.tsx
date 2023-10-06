@@ -8,6 +8,7 @@ import { checkToken, resetFormError } from "./redux/actions"
 import { GlobalState } from "./types"
 import NavBar from "./components/NavBar/NavBar"
 import Task from "./views/Task/Task"
+import LandingPage from "./views/LandingPage/LandingPage"
 
 function App() {
 
@@ -30,7 +31,7 @@ function App() {
     <div>
       <NavBar />
       <Routes>
-        <Route path="/" element={<h1>Landing Page</h1>}/>
+        <Route path="/" element={<LandingPage />}/>
         <Route path="/login" element={<Login />}/>
           <Route path="/register" element={<Register />}/>
 
