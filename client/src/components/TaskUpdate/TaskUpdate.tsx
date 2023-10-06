@@ -17,12 +17,32 @@ const TaskUpdate = (props:any) => {
     const [ startDate, setStartDate ] = useState(new Date(task.startDate))
     const [ endDate, setEndDate ] = useState(new Date(task.endDate))
     const [ minDate, _setMinDate ] = useState(new Date())
+    const [ dateError, setDateError ] = useState("")
 
     useEffect(()=> {
         setValue('title', task.title)
     }, [])
 
+    useEffect(()=> {
+        if(dateError !== ""){
+            const timer = setTimeout(()=>{
+                setDateError("")
+            }, 10000)
+            return () => clearTimeout(timer)
+        }
+    },[dateError])
+
+
     const onSubmit = (async(data:Task)=>{
+
+        const formattedStartDate = dayjs(startDate).format("YYYY-MM-DDTHH:mm:ss")
+        const formattedEndDate = dayjs(endDate).format("YYYY-MM-DDTHH:mm:ss")
+
+        if (dayjs(formattedEndDate).isBefore(formattedStartDate)) {
+            setDateError("The end date cannot be before the start date.")
+            return
+        }
+
         const result = await Swal.fire({
             title: "You're sure?",
             text: 'Do you want to update this event?',
@@ -33,8 +53,8 @@ const TaskUpdate = (props:any) => {
         });
         const values:Task = {
             title: data.title,
-            startDate: dayjs(startDate).format("YYYY-MM-DDTHH:mm:ss"),
-            endDate: dayjs(endDate).format("YYYY-MM-DDTHH:mm:ss")
+            startDate: formattedStartDate,
+            endDate: formattedEndDate
         }
         if (result.isConfirmed) {
             await dispatch(updateTask(id, values) as any)
@@ -84,6 +104,7 @@ const TaskUpdate = (props:any) => {
                 dateFormat="MMMM d, yyyy h:mm aa"
                 className="inputs"
                 />
+                {dateError !== "" && <p className="text-red-500">{dateError}</p>}
                 <button type='submit' className="bg-blue-500 hover:bg-blue-600 w-32 h-10 rounded-md shadow-md mt-4">Update Task</button>
             </form>
         </div>

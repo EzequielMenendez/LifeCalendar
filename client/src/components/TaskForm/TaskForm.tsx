@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form"
 import { Task } from "../../types"
 import DatePicker from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.css"
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useDispatch } from "react-redux"
 import dayjs from "dayjs"
 import utc from "dayjs/plugin/utc"
@@ -16,16 +16,37 @@ function TaskForm(props: any){
     const [ startDate, setStartDate ] = useState(new Date())
     const [ endDate, setEndDate ] = useState(new Date())
     const [ minDate, _setMinDate ] = useState(new Date())
+    const [ dateError, setDateError ] = useState("")
 
-    const onSubmit = (async(data:Task)=>{
-        const values:Task = {
-            title: data.title,
-            startDate: dayjs(startDate).format("YYYY-MM-DDTHH:mm:ss"),
-            endDate: dayjs(endDate).format("YYYY-MM-DDTHH:mm:ss")
+    useEffect(()=> {
+        if(dateError !== ""){
+            const timer = setTimeout(()=>{
+                setDateError("")
+            }, 10000)
+            return () => clearTimeout(timer)
         }
-        dispatch(createTask(values) as any)
-        handleCloseAlert()
-    })
+    },[dateError])
+
+    const onSubmit = async (data: Task) => {
+        const formattedStartDate = dayjs(startDate).format("YYYY-MM-DDTHH:mm:ss")
+        const formattedEndDate = dayjs(endDate).format("YYYY-MM-DDTHH:mm:ss")
+      
+        if (dayjs(formattedEndDate).isBefore(formattedStartDate)) {
+          setDateError("The end date cannot be before the start date.")
+          return
+        }
+      
+        setDateError("")
+
+        const values: Task = {
+          title: data.title,
+          startDate: formattedStartDate,
+          endDate: formattedEndDate,
+        }
+      
+        dispatch(createTask(values) as any);
+        handleCloseAlert();
+    }
 
     const onChangeStart = (date:Date) => {
         setStartDate(date)
@@ -75,6 +96,7 @@ function TaskForm(props: any){
                 dateFormat="MMMM d, yyyy h:mm aa"
                 className="inputs"
                 />
+                {dateError !== "" && <p className="text-red-500">{dateError}</p>}
                 <button type='submit' className="bg-blue-500 hover:bg-blue-600 w-32 h-10 rounded-md shadow-md mt-4">Create Event</button>
             </form>
         </div>
