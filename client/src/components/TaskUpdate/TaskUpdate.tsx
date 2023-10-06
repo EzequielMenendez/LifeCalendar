@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form"
-import { Task } from "../../types"
+import { ErrorData, Task } from "../../types"
 import DatePicker from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.css"
 import { useState, useEffect } from 'react'
@@ -17,16 +17,16 @@ const TaskUpdate = (props:any) => {
     const [ startDate, setStartDate ] = useState(new Date(task.startDate))
     const [ endDate, setEndDate ] = useState(new Date(task.endDate))
     const [ minDate, _setMinDate ] = useState(new Date())
-    const [ dateError, setDateError ] = useState("")
+    const [ dateError, setDateError ] = useState<ErrorData | null>(null)
 
     useEffect(()=> {
         setValue('title', task.title)
     }, [])
 
     useEffect(()=> {
-        if(dateError !== ""){
+        if(dateError){
             const timer = setTimeout(()=>{
-                setDateError("")
+                setDateError(null)
             }, 10000)
             return () => clearTimeout(timer)
         }
@@ -39,7 +39,12 @@ const TaskUpdate = (props:any) => {
         const formattedEndDate = dayjs(endDate).format("YYYY-MM-DDTHH:mm:ss")
 
         if (dayjs(formattedEndDate).isBefore(formattedStartDate)) {
-            setDateError("The end date cannot be before the start date.")
+            setDateError({...dateError, end: "The end date cannot be before the start date."})
+            return
+        }
+
+        if(dayjs(formattedStartDate).isBefore(new Date(task.startDate))) {
+            setDateError({...dateError, start: "You cannot set the start date before the current date."})
             return
         }
 
@@ -94,6 +99,7 @@ const TaskUpdate = (props:any) => {
                 dateFormat="MMMM d, yyyy h:mm aa"
                 className="inputs"
                 />
+                {dateError?.start&& <p className="text-red-500">{dateError.start}</p>}
                 <label className="text-lg font-bold">End Date:</label>
                 <DatePicker 
                 selected={endDate}
@@ -104,7 +110,7 @@ const TaskUpdate = (props:any) => {
                 dateFormat="MMMM d, yyyy h:mm aa"
                 className="inputs"
                 />
-                {dateError !== "" && <p className="text-red-500">{dateError}</p>}
+                {dateError?.end && <p className="text-red-500">{dateError.end}</p>}
                 <button type='submit' className="bg-blue-500 hover:bg-blue-600 w-32 h-10 rounded-md shadow-md mt-4">Update Task</button>
             </form>
         </div>

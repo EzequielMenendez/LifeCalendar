@@ -52,3 +52,8 @@ export interface MyEvent extends Event{
     end: Date | string;
     location?: string;
 }
+
+export interface ErrorData {
+    end?: string
+    start?:string
+}
