@@ -1,13 +1,16 @@
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { GlobalState } from "../../types";
 
 const LandingPage = () => {
+    const isAuth = useSelector((state:GlobalState)=>state.isAuth)
     return (
       <div>
         <section className="bg-gray-100 py-16">
           <div className="container mx-auto text-center">
             <h1 className="text-4xl font-bold text-gray-800 mb-4">Welcome to Life Calendar</h1>
             <p className="text-lg text-gray-600 mb-8">Your personalized calendar experience</p>
-            <Link to="/login" className="bg-blue-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-blue-700 transition duration-300 ease-in-out">Get Started</Link>
+            <Link to="/login" className="bg-blue-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-blue-700 transition duration-300 ease-in-out">{isAuth ? ("My Calendar") : ("Get Started")}</Link>
           </div>
         </section>
   
