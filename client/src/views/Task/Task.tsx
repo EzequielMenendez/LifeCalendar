@@ -21,13 +21,13 @@ function Task(){
     }
 
     return(
-        <div>
+        <div className="flex flex-col mx-1 md:mx-10 sm:5">
             {showAlert && (
                 <div className="pop-ups">
                     <div className="flex h-[calc(100vh-100px)] items-center justify-center">
-                        <div className="bg-zinc-800 max-w-md p-10 rounded-md">
+                        <div className="bg-white max-w-md p-10 rounded-md">
+                            <button onClick={()=> handleCloseAlert()} className="bg-red-500 w-6 h-6 rounded-md hover:bg-red-600 shadow-md">X</button>
                             <TaskForm handleCloseAlert={handleCloseAlert}/>
-                            <button onClick={()=> handleCloseAlert()}>X</button>
                         </div>
                     </div>
                 </div>
@@ -35,17 +35,17 @@ function Task(){
             {showDetails && (
                 <div className="pop-ups">
                     <div className="flex h-[calc(100vh-100px)] items-center justify-center">
-                        <div className="bg-zinc-800 max-w-md p-10 rounded-md">
+                        <div className="bg-white max-w-md p-10 rounded-md">
                             {!showUpdate && (
-                            <button onClick={()=> handleCloseDetail()} className="bg-red-600 w-6 h-6 rounded-md hover:bg-red-700">X</button>
+                            <button onClick={()=> handleCloseDetail()} className="bg-red-500 w-6 h-6 rounded-md hover:bg-red-600 shadow-md">X</button>
                             )}
                             <TaskDetail id={showDetails} showUpdate={showUpdate} setShowUpdate={setShowUpdate} handleCloseDetail={handleCloseDetail}/>
                         </div>
                     </div>
                 </div>
             )}
-            <h1>Task</h1>
-            <button onClick={()=> handleOpenAlert()}>create Task</button>
+            <h1 className="text-2xl m-auto mt-8">Calendar</h1>
+            <button onClick={()=> handleOpenAlert()} className='bg-blue-500 hover:bg-blue-600 w-24 h-7 rounded-md shadow-md mt-3 mb-6'>create Task</button>
             <TaskCalendar setShowDetails={setShowDetails} />
         </div>
     )

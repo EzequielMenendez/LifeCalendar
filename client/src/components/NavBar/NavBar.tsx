@@ -15,7 +15,7 @@ function NavBar() {
     if(isAuth){
         return (
             <header>
-                <nav className="h-20 flex items-center justify-around bg-zinc-800">
+                <nav className="h-20 flex items-center justify-around bg-white shadow-md">
                     <Link to='/'>Life Calendar</Link>
                     <div className="flex gap-10">
                         <Link to='/task' className="mr-12">Task</Link>
@@ -27,7 +27,7 @@ function NavBar() {
     }
     return (
         <header>
-            <nav className="h-20 flex items-center justify-around bg-zinc-800">
+            <nav className="h-20 flex items-center justify-around bg-white shadow-md">
                 <Link to='/'>Life Calendar</Link>
                 <div className="flex gap-10">
                     <Link to='/login'>Login</Link>

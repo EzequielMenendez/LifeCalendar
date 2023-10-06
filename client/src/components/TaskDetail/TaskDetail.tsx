@@ -60,7 +60,7 @@ const TaskDetail = (props:any) => {
     if(showUpdate){
         return(
             <div>
-                <button onClick={()=> onCloseUpdate()} className="bg-red-600 w-6 h-6 rounded-md hover:bg-red-700">X</button>
+                <button onClick={()=> onCloseUpdate()} className="bg-red-500 w-6 h-6 rounded-md hover:bg-red-600 shadow-md">X</button>
                 <TaskUpdate id={id} task={task} onCloseUpdate={onCloseUpdate}/>
             </div>
         )
@@ -75,8 +75,8 @@ const TaskDetail = (props:any) => {
         <p>End Date:</p>
         <p>{endDate}</p>
         <div className='flex gap-2 flex-wrap mt-4'>
-            <button onClick={onShowUpdate} className='bg-sky-500 w-24 h-7 rounded-md'>Uptade Task</button><br></br>
-            <button onClick={onDelete} className='bg-red-600 w-24 h-7 rounded-md'>Delete Task</button>
+            <button onClick={onShowUpdate} className='bg-blue-500 hover:bg-blue-600 w-24 h-7 rounded-md shadow-md'>Uptade Task</button><br></br>
+            <button onClick={onDelete} className='bg-red-500 w-24 h-7 rounded-md shadow-md hover:bg-red-600'>Delete Task</button>
         </div>
     </div>
   )

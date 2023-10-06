@@ -45,7 +45,7 @@ function TaskForm(props: any){
                     required: 'Title is required',
                 })}
                 placeholder="Title"
-                className="w-full bg-zinc-700 text-white px-4 py-2 rounded-md my-2"
+                className="inputs"
                 />
                 {errors.title && <p className='text-red-500'>Title is required</p>}
                 <DatePicker
@@ -55,7 +55,7 @@ function TaskForm(props: any){
                 showTimeSelect
                 minDate={minDate}
                 dateFormat="MMMM d, yyyy h:mm aa"
-                className="text-black"
+                className="inputs"
                 />
 
                 <DatePicker 
@@ -65,9 +65,9 @@ function TaskForm(props: any){
                 showTimeSelect
                 minDate={startDate}
                 dateFormat="MMMM d, yyyy h:mm aa"
-                className="text-black"
+                className="inputs"
                 />
-                <button type='submit'>Create Task</button>
+                <button type='submit' className='bg-blue-500 hover:bg-blue-600 w-24 h-7 rounded-md shadow-md mt-4'>Create Task</button>
             </form>
         </div>
     )

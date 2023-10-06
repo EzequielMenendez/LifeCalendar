@@ -15,7 +15,7 @@ function Register() {
   const navigate = useNavigate()
 
   useEffect(()=>{
-    if(isAuthenticated)navigate('/home')
+    if(isAuthenticated)navigate('/')
   }, [isAuthenticated])
 
   const onSubmit = async (values: RegisterUser) => {
@@ -25,18 +25,18 @@ function Register() {
 
   return (
     <div className='flex h-[calc(100vh-100px)] items-center justify-center'>
-    <div className='bg-zinc-800 max-w-md p-10 rounded-md'>
+    <div className='bg-white max-w-md p-10 rounded-md shadow-md'>
     <h2 className="text-2xl font-bold">Register</h2>
       {
         registerError && (
           <div>
-            <p className='bg-red-500 p-2 text-white my-2'>{registerError}</p>
+            <p className='bg-red-500 p-2 text-white my-2 rounded-md'>{registerError}</p>
           </div>
         )
       }
         <form onSubmit={handleSubmit(onSubmit as any)}>
             <input type="text" {...register('name', {required: 'true'})} placeholder='name'
-            className='w-full bg-zinc-700 text-white px-4 py-2 rounded-md my-2'/>
+            className='inputs'/>
             {errors.name && <p className='text-red-500'>Name is required</p>}
             <input
             type="email"
@@ -49,7 +49,7 @@ function Register() {
             },
             })}
             placeholder="Email"
-            className="w-full bg-zinc-700 text-white px-4 py-2 rounded-md my-2"
+            className="inputs"
             />
             {errors.email ? (
             <p className="text-red-500">
@@ -61,13 +61,13 @@ function Register() {
             </p>
             ) : null}
             <input type="password" {...register('password', {required: 'true', minLength: 6})} placeholder='password'
-            className='w-full bg-zinc-700 text-white px-4 py-2 rounded-md my-2'/>
+            className='inputs'/>
             {errors.password?.type === 'required' ? (
             <p className='text-red-500'>password is required</p>
             ) : errors.password?.type === 'minLength' ? (
             <p className='text-red-500'>Password must be at least 6 characters</p>
             ) : null}
-            <button type='submit'>Register</button>
+            <button type='submit' className='bg-blue-500 hover:bg-blue-600 w-24 h-7 rounded-md shadow-md mt-4'>Register</button>
         </form>
         <p className="flex gap-x-2 justify-between">Already have an account? <Link to="/login" className="text-sky-500">Sing In</Link></p>
     </div>
