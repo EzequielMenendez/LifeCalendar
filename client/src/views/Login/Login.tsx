@@ -26,7 +26,7 @@ function Login() {
   return (
     <div className='flex h-[calc(100vh-100px)] items-center justify-center'>
       <div className=" bg-white max-w-md p-10 rounded-md shadow-md">
-        <h2 className="text-2xl font-bold">Login</h2>
+        <h2 className="text-2xl font-bold mb-2">Login</h2>
         {
         siginError && (
           <div>
@@ -46,7 +46,7 @@ function Login() {
           },
           })}
           placeholder="Email"
-          className="inputs"
+          className="inputs my-2"
           />
           {errors.email ? (
           <p className="text-red-500">
@@ -58,16 +58,16 @@ function Login() {
           </p>
           ) : null}
           <input type="password" {...register('password', {required: 'true', minLength: 6})} placeholder='password'
-          className='inputs'/>
+          className='inputs my-2'/>
           {errors.password?.type === 'required' ? (
           <p className='text-red-500'>password is required</p>
           ) : errors.password?.type === 'minLength' ? (
           <p className='text-red-500'>Password must be at least 6 characters</p>
           ) : null}
-          <button type='submit' className='bg-blue-500 hover:bg-blue-600 w-24 h-7 rounded-md shadow-md mt-4'>Login</button>
+          <button type='submit' className="bg-blue-500 hover:bg-blue-600 text-white w-full py-2 rounded-md shadow-md my-2">Login</button>
         </form>
 
-        <p className="flex gap-x-2 justify-between">Don´t have an account? <Link to="/register" className="text-sky-500">Sing Up</Link></p>
+        <p className="flex gap-x-2 justify-between my-2">Don´t have an account? <Link to="/register" className="text-sky-500">Sing Up</Link></p>
       </div>
     </div>
   )
