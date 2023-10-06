@@ -21,7 +21,7 @@ function Task(){
     }
 
     return(
-        <div className="flex flex-col mx-1 md:mx-10 sm:5">
+        <div className="mx-1 md:mx-10 sm:5 min-h-[84vh] mb-2">
             {showAlert && (
                 <div className="pop-ups">
                     <div className="flex h-[calc(100vh-100px)] items-center justify-center">
