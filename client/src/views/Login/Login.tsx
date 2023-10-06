@@ -15,7 +15,7 @@ function Login() {
   const dispatch = useDispatch()
 
   useEffect(()=>{
-    if(isAuthenticated)navigate('/')
+    if(isAuthenticated)navigate('/task')
   }, [isAuthenticated])
 
   const onSubmit = ((values:LoginUser)=>{

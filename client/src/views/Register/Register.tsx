@@ -15,7 +15,7 @@ function Register() {
   const navigate = useNavigate()
 
   useEffect(()=>{
-    if(isAuthenticated)navigate('/')
+    if(isAuthenticated)navigate('/task')
   }, [isAuthenticated])
 
   const onSubmit = async (values: RegisterUser) => {

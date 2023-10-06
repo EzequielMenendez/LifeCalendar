@@ -9,6 +9,7 @@ import { GlobalState } from "./types"
 import NavBar from "./components/NavBar/NavBar"
 import Task from "./views/Task/Task"
 import LandingPage from "./views/LandingPage/LandingPage"
+import Footer from "./components/Footer/Footer"
 
 function App() {
 
@@ -39,6 +40,7 @@ function App() {
             <Route path="/task" element={<Task/>}/>
           </Route>
       </Routes>
+      <Footer />
     </div>
   )
 }
