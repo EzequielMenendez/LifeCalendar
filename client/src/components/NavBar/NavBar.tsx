@@ -12,30 +12,55 @@ function NavBar() {
         dispatch(logout() as any)
     }
 
-    if(isAuth){
-        return (
-            <header>
-                <nav className="h-20 flex items-center justify-around bg-white shadow-md">
-                    <Link to='/'>Life Calendar</Link>
-                    <div className="flex gap-10">
-                        <Link to='/task' className="mr-12">Task</Link>
-                        <button onClick={onLogout}>Logout</button>
-                    </div>
-                </nav>
-            </header>
-        )
-    }
-    return (
-        <header>
-            <nav className="h-20 flex items-center justify-around bg-white shadow-md">
-                <Link to='/'>Life Calendar</Link>
-                <div className="flex gap-10">
-                    <Link to='/login'>Login</Link>
-                    <Link to='/register'>Register</Link>
-                </div>
-            </nav>
-      </header>
-    )
+  return (
+    <header>
+      <nav className="bg-white shadow-md">
+        <div className="container mx-auto py-4 px-6 flex items-center justify-between">
+          <div className="flex items-center justify-between">
+            <Link
+              to="/"
+              className="text-xl font-bold text-gray-800 hover:text-blue-500 transition duration-300 ease-in-out"
+            >
+              Life Calendar
+            </Link>
+          </div>
+          <div className={`md:flex`}>
+            {isAuth ? (
+              <div className="md:flex gap-4">
+                <Link
+                  to="/task"
+                  className="block text-gray-800 hover:text-blue-500 transition duration-300 ease-in-out"
+                >
+                  Task
+                </Link>
+                <button
+                  onClick={onLogout}
+                  className="block text-gray-800 hover:text-blue-500 transition duration-300 ease-in-out"
+                >
+                  Logout
+                </button>
+              </div>
+            ) : (
+              <div className="md:flex gap-4">
+                <Link
+                  to="/login"
+                  className="block text-gray-800 hover:text-blue-500 transition duration-300 ease-in-out"
+                >
+                  Login
+                </Link>
+                <Link
+                  to="/register"
+                  className="block text-gray-800 hover:text-blue-500 transition duration-300 ease-in-out"
+                >
+                  Register
+                </Link>
+              </div>
+            )}
+          </div>
+        </div>
+      </nav>
+    </header>
+  )
 }
   
 export default NavBar
