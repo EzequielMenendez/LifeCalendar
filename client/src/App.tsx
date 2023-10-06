@@ -10,6 +10,7 @@ import NavBar from "./components/NavBar/NavBar"
 import Task from "./views/Task/Task"
 import LandingPage from "./views/LandingPage/LandingPage"
 import Footer from "./components/Footer/Footer"
+import AboutMe from "./views/AboutMe/AboutMe"
 
 function App() {
 
@@ -34,8 +35,8 @@ function App() {
       <Routes>
         <Route path="/" element={<LandingPage />}/>
         <Route path="/login" element={<Login />}/>
-          <Route path="/register" element={<Register />}/>
-
+        <Route path="/register" element={<Register />}/>
+        <Route path="/aboutme" element={<AboutMe />}/>
           <Route element={<ProtectedRoutes/>}>
             <Route path="/task" element={<Task/>}/>
           </Route>

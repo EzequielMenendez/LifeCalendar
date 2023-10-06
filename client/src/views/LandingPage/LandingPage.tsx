@@ -35,7 +35,7 @@ const LandingPage = () => {
           <div className="container mx-auto text-center">
             <h2 className="text-3xl font-bold text-gray-800 mb-8">About Us</h2>
             <p className="text-lg text-gray-600 mb-8">Learn more about our mission and team.</p>
-            <a href="#team" className="bg-blue-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-blue-700 transition duration-300 ease-in-out">Meet the Team</a>
+            <Link to="/aboutme" className="bg-blue-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-blue-700 transition duration-300 ease-in-out">Meet the Team</Link>
           </div>
         </section>
       </div>
