@@ -44,8 +44,15 @@ function Task(){
                     </div>
                 </div>
             )}
-            <h1 className="text-2xl m-auto mt-8">Calendar</h1>
-            <button onClick={()=> handleOpenAlert()} className="bg-blue-500 hover:bg-blue-600 w-32 h-10 rounded-md shadow-md mt-4 mb-4">create Event</button>
+            <h1 className="text-2xl m-auto mt-8 text-center sm:text-left">Calendar</h1>
+            <div className="flex justify-center sm:justify-start">
+                <button
+                    onClick={() => handleOpenAlert()}
+                    className="bg-blue-500 hover:bg-blue-600 w-32 h-10 rounded-md shadow-md mt-4 mb-4 mx-auto sm:mx-0"
+                >
+                Create Event
+                </button>
+            </div>
             <TaskCalendar setShowDetails={setShowDetails} />
         </div>
     )
