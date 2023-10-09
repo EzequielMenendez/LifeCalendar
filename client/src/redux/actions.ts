@@ -49,6 +49,7 @@ export const singUp = (user:RegisterUser) => {
 export const checkToken = () => {
     return async function(dispatch:Dispatch){
         const cookies = Cookies.get()
+        console.log(cookies)
         if(!cookies.token){
             return dispatch({
                 type: LOGOUT
