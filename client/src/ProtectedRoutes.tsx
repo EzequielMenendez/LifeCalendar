@@ -10,8 +10,9 @@ function ProtectedRoutes(){
     if(loading){
         <h1>Loading...</h1>
     }
-    if(!loading && !isAuthenticated){
-        return <Navigate to='/login' replace/>
+    if (!loading && !isAuthenticated) {
+        window.location.href = '/login';
+        return null
     }
 
     return <Outlet/>
