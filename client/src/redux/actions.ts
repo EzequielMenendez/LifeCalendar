@@ -1,5 +1,5 @@
 import { Dispatch } from 'redux';
-import { deleteTaskRequest, getAllTaskRequest, getTaskRequest, loginRequest, postTaskRequest, putTaskRequest, registerRequest, verifyTokenRequest } from "../api/auth"
+import { deleteTaskRequest, getAllTaskRequest, getTaskRequest, loginRequest, logoutRequest, postTaskRequest, putTaskRequest, registerRequest, verifyTokenRequest } from "../api/auth"
 import { LoginUser, RegisterUser, Task } from "../types"
 import Cookies from 'js-cookie'
 import Swal from 'sweetalert2';
@@ -76,6 +76,7 @@ export const checkToken = () => {
 export const logout = () => {
     return async function(dispatch:Dispatch){
         Cookies.remove("token")
+        await logoutRequest()
         return dispatch({
             type: LOGOUT
         })

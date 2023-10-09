@@ -30,3 +30,5 @@ export const deleteTaskRequest = async(id: string) => {
 }
 
 export const verifyTokenRequest = async() => axios.get('/user/verify')
+
+export const logoutRequest = async() => axios.post('/user/logout')
