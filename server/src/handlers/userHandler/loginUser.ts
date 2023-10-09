@@ -6,6 +6,12 @@ import createToken from "../../libs/jwt";
 const loginUser = async(req: Request, res: Response)=>{
     const { email, password } = req.body
     try {
+
+        if(email.length > 40){
+            res.status(400).json({message: "Email is too long"})
+            return
+        }
+
         const user = await userModel.findOne({email})
 
         if(!user){

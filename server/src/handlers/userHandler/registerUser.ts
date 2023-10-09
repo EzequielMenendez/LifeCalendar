@@ -15,6 +15,16 @@ const registerUser = async(req: Request, res: Response)=>{
             return
         }
 
+        if(name.length > 15){
+            res.status(400).json({message: "Name is too long"})
+            return
+        }
+
+        if(email.length > 40){
+            res.status(400).json({message: "Email is too long"})
+            return
+        }
+
         const hash:string = await bcrypt.hash(password, 10)
     
         const newUser = new User({
