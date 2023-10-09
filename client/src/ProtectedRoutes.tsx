@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom"
+import { Navigate, Outlet } from "react-router-dom"
 import { useSelector } from "react-redux"
 import { GlobalState } from "./types"
 
@@ -10,9 +10,8 @@ function ProtectedRoutes(){
     if(loading){
         <h1>Loading...</h1>
     }
-    if (!loading && !isAuthenticated) {
-        window.location.href = '/login';
-        return null
+    if(!loading && !isAuthenticated){
+        return <Navigate to='/login' replace/>
     }
 
     return <Outlet/>

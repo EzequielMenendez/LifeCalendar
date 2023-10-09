@@ -33,6 +33,7 @@ export const singUp = (user:RegisterUser) => {
     return async function(dispatch:Dispatch){
         try {
             const res = await registerRequest(user)
+            console.log(res.data)
             return dispatch({
                 type: SING_IN_SING_UP,
                 payload: res.data
