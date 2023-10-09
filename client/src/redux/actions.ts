@@ -4,7 +4,8 @@ import { LoginUser, RegisterUser, Task } from "../types"
 import Cookies from 'js-cookie'
 import Swal from 'sweetalert2';
 
-export const SING_IN_SING_UP = "SING_IN_SING_UP"
+export const SING_IN = "SING_IN"
+export const SING_UP = "SING_UP"
 export const LOGOUT = "LOGOUT"
 export const RESET_ERROR = "RESET_ERROR"
 export const GET_ALL_TASK = "GET_ALL_TASK"
@@ -17,7 +18,7 @@ export const singIn = (user:LoginUser) => {
         try {
             const res = await loginRequest(user)
             return dispatch({
-                type: SING_IN_SING_UP,
+                type: SING_IN,
                 payload: res.data
             })
         } catch (error:any) {
@@ -34,7 +35,7 @@ export const singUp = (user:RegisterUser) => {
         try {
             const res = await registerRequest(user)
             return dispatch({
-                type: SING_IN_SING_UP,
+                type: SING_UP,
                 payload: res.data
             })
         } catch (error:any) {

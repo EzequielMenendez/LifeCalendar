@@ -1,5 +1,5 @@
 import { ActionRedux, GlobalState } from "../types";
-import { RESET_CALENDAR, ERROR, GET_ALL_TASK, GET_TASK, LOGOUT, RESET_ERROR, SING_IN_SING_UP } from "./actions";
+import { RESET_CALENDAR, ERROR, GET_ALL_TASK, GET_TASK, LOGOUT, RESET_ERROR, SING_IN, SING_UP } from "./actions";
 
 const initialState:GlobalState = {
     user: null,
@@ -13,12 +13,20 @@ const initialState:GlobalState = {
 
 function rootReducer(state=initialState, action:ActionRedux){
     switch(action.type){
-        case SING_IN_SING_UP:
+        case SING_IN:
             return{
                 ...state,
                 user: action.payload,
                 isAuth: true,
                 loading: false
+            }
+        case SING_UP:
+            return{
+                ...state,
+                user: action.payload,
+                isAuth: true,
+                loading: false,
+                allTask: []
             }
         case LOGOUT:
             return{
