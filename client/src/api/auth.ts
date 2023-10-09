@@ -1,32 +1,32 @@
 import axios from "./axios";
 import { RegisterUser, LoginUser, Task } from "../types";
 
-export const registerRequest = (user: RegisterUser) => {
-    return axios.post(`/user/register`, user)
+export const registerRequest = async(user: RegisterUser) => {
+    return await axios.post(`/user/register`, user)
 }
 
-export const loginRequest = (user:LoginUser) => {
-    return axios.post(`/user/login`, user)
+export const loginRequest = async(user:LoginUser) => {
+    return await axios.post(`/user/login`, user)
 }
 
-export const postTaskRequest = (task: Task) => {
-    return axios.post('/task', task)
+export const postTaskRequest = async(task: Task) => {
+    return await axios.post('/task', task)
 }
 
-export const getAllTaskRequest = () => {
-    return axios.get('/task')
+export const getAllTaskRequest = async() => {
+    return await axios.get('/task')
 }
 
-export const getTaskRequest = (id: string) => {
-    return axios.get(`/task/${id}`)
+export const getTaskRequest = async(id: string) => {
+    return await axios.get(`/task/${id}`)
 }
 
-export const putTaskRequest = (id: string, task: Task) => {
-    return axios.put(`/task/${id}`, task)
+export const putTaskRequest = async(id: string, task: Task) => {
+    return await axios.put(`/task/${id}`, task)
 }
 
-export const deleteTaskRequest = (id: string) => {
-    return axios.delete(`/task/${id}`)
+export const deleteTaskRequest = async(id: string) => {
+    return await axios.delete(`/task/${id}`)
 }
 
-export const verifyTokenRequest = () => axios.get('/user/verify')
+export const verifyTokenRequest = async() => await axios.get('/user/verify')
