@@ -30,10 +30,10 @@ function rootReducer(state=initialState, action:ActionRedux){
             }
         case LOGOUT:
             return{
+                ...state,
                 user: null,
                 isAuth: false,
-                errors: null,
-                loading: true,
+                loading: false,
                 allTask: [],
                 taskDetail: null,
                 resetCalendar: 0
