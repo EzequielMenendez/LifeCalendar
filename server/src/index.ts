@@ -16,7 +16,7 @@ if(process.env.DB_URL){
 
 const server = express()
 server.use(cors({
-    origin: 'https://life-calendar-5rji.vercel.app/',
+    origin: 'http://localhost:5173',
     credentials: true
 }))
 server.use(express.json())
