@@ -75,8 +75,8 @@ export const checkToken = () => {
 
 export const logout = () => {
     return async function(dispatch:Dispatch){
-        Cookies.remove("token")
         await logoutRequest()
+        Cookies.remove("token")
         return dispatch({
             type: LOGOUT
         })

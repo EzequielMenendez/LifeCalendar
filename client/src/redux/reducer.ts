@@ -28,6 +28,12 @@ function rootReducer(state=initialState, action:ActionRedux){
                 loading: false
             }
         case GET_ALL_TASK:
+            if(!action.payload.length){
+                return{
+                    ...state,
+                    allTask: []
+                }
+            }
             return{
                 ...state,
                 allTask: action.payload
