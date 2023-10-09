@@ -63,7 +63,7 @@ export const checkToken = () => {
                 })
             }
             return dispatch({
-                type: SING_IN_SING_UP,
+                type: SING_IN,
                 payload: res.data
             })
         } catch (error) {
