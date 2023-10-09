@@ -4,7 +4,7 @@ import Register from "./views/Register/Register"
 import ProtectedRoutes from "./ProtectedRoutes"
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from "react-redux"
-import { checkToken, resetFormError } from "./redux/actions"
+import { resetFormError } from "./redux/actions"
 import { GlobalState } from "./types"
 import NavBar from "./components/NavBar/NavBar"
 import Task from "./views/Task/Task"
@@ -16,9 +16,9 @@ function App() {
 
   const dispatch = useDispatch()
   const errorForm = useSelector((state:GlobalState)=>state.errors)
-  useEffect(()=>{
+  /*useEffect(()=>{
     dispatch(checkToken() as any)
-  },[])
+  },[])*/
 
   useEffect(()=>{
     if(errorForm){
